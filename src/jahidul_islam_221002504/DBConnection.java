@@ -18,7 +18,9 @@ public class DBConnection {
         Connection conn = null;
         try{
             //register jdbc
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.cj.jdbc.Driver") ;
+
             //open a conn
             conn = DriverManager.getConnection(DB_URL,USER ,PASS );
             return conn;

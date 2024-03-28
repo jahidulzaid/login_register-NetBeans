@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
         Password_Login = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        signup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,12 +61,12 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Vrinda", 2, 14)); // NOI18N
         jLabel4.setText("I don't have an account?");
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Signup");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        signup.setBackground(new java.awt.Color(255, 102, 255));
+        signup.setForeground(new java.awt.Color(255, 255, 255));
+        signup.setText("Signup");
+        signup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                signupActionPerformed(evt);
             }
         });
 
@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3))
+                                    .addComponent(signup))
                                 .addComponent(Email_Login)
                                 .addComponent(jLabel3)
                                 .addComponent(Password_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(85, 85, 85)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton3))
+                    .addComponent(signup))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -140,24 +140,21 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Email_LoginActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_signupActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String email = Email_Login.getText();
-        String password = Password_Login.getPassword().toString();
+        String password = String.valueOf(Password_Login.getPassword());
+        
         if(email.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(this, "Email/Pass empty", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             //lg starts here
             userLogin(email, password);
-            
-            
         }
-        
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -199,34 +196,76 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField Email_Login;
     private javax.swing.JPasswordField Password_Login;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton signup;
     // End of variables declaration//GEN-END:variables
 
     private void userLogin(String email, String password) {
+
+        
         Connection dbconn = DBConnection.connectDB();
         try{
             PreparedStatement st;
-            st = dbconn.preparedStatement("Select * from registration Where email = ? AND password = ?");
+            st = dbconn.prepareStatement("Select * from registration Where email = ? AND password = ?;");
+            
             st.setString(1, email);
             st.setString(2, password);
             ResultSet result = st.executeQuery();
+  
             
             if(result.next()){
                 dispose();
-                homePage home = new homePage();
-                home.setTitle("Home Page");
+                HomePage home = new HomePage();
                 home.setVisible(true);
+            }else{
+                System.out.println("eamil : " + email);
+                System.out.println("pass : " + password);
+                JOptionPane.showMessageDialog(this, "Email/Pass not found", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
+            
+            
         }catch(SQLException ex){
-            Logger.getLogger(Login.class.getName()).log(Level.SERERE, null, ex);
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error opening HomePage: " + ex.getMessage());
         }
-        
+
+//        try{
+//            Class.forName("com.mysql.cj.jdbc.Driver") ;
+//            
+//            String url = "jdbc:MySQL://localhost:3306/accounts" ;
+//            String user = "root";
+//            String pass = "";
+//            
+//            Connection con = DriverManager.getConnection(url, user, pass) ;
+//            Statement st = con.createStatement();
+//            
+//            String query = "Insert into registration(email, password)"
+//                    + " values('"+email+"','"+password+"')";
+//            
+////            System.out.println(query);
+//            
+//            int result = st.executeUpdate(query);
+////            ResultSet result = st.executeQuery();
+//            con.close();
+//            
+//            if(result){
+//                dispose();
+//                HomePage home = new HomePage();
+//                home.setTitle("Home Page");
+//                home.setVisible(true);
+//            }
+//            
+//            System.out.println("Succesful");
+//            
+//            
+//        }catch(Exception e){
+//            System.out.println("Error: "+e.getMessage());
+//        }
         
     }
 }

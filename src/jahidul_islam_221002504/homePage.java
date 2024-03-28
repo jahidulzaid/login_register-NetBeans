@@ -8,13 +8,19 @@ package jahidul_islam_221002504;
  *
  * @author Jahid
  */
-public class homePage extends javax.swing.JPanel {
+public class HomePage extends javax.swing.JPanel {
 
     /**
      * Creates new form homePage
      */
-    public homePage() {
+    public HomePage() {
         initComponents();
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HomePage().setVisible(true);
+            }
+        });
     }
 
     /**
@@ -37,14 +43,14 @@ public class homePage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addComponent(jLabel1)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -52,4 +58,5 @@ public class homePage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
 }
