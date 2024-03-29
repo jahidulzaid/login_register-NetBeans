@@ -410,7 +410,7 @@ public class registration extends javax.swing.JFrame {
         Connection dbconn = DBConnection.connectDB();
         try{
             PreparedStatement st;
-            st = dbconn.prepareStatement("INSERT INTO registration Values(?, ?, ?, ?, ?, ?, ?)");
+            st = dbconn.prepareStatement("INSERT INTO registration (full_name, email, username, password, gender, country, phone_number) Values(?, ?, ?, ?, ?, ?, ?)");
             
             st.setString(1, fullName);
             st.setString(2, Email);
