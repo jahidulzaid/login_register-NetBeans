@@ -142,6 +142,12 @@ public class Login extends javax.swing.JFrame {
 
     private void signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupActionPerformed
         // TODO add your handling code here:
+        
+        dispose();
+        registration r = new registration();
+        r.setTitle("Register User");
+        r.setVisible(true);
+        
     }//GEN-LAST:event_signupActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
