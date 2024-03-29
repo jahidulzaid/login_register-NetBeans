@@ -4,17 +4,26 @@ package jahidul_islam_221002504;
 import java.lang.System.Logger;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 
 public class Login extends javax.swing.JFrame {
 
-    DBConnection conn;
+    
+    Connection dbconn = null;
+    ResultSet result = null;
+    PreparedStatement st = null;
     public Login() {
         initComponents();
-        conn = new DBConnection();
-        if(conn == null){
-            JOptionPane.showMessageDialog(this, "DB Conn not Abailable", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        dbconn = DBConnection.connectDB();
     }
 
     @SuppressWarnings("unchecked")
@@ -213,33 +222,39 @@ public class Login extends javax.swing.JFrame {
     private void userLogin(String email, String password) {
 
         
-        Connection dbconn = DBConnection.connectDB();
-        try{
-            PreparedStatement st;
-            st = dbconn.prepareStatement("Select * from registration Where email = ? AND password = ?;");
-            
+//        Connection dbconn = DBConnection.connectDB();
+        if(dbconn != null){
+            try{
+//            PreparedStatement st = (PreparedStatement)
+//                dbconn.prepareStatement("Select * from registration Where email = ? AND password = ?;");
+//            
+            String sql = "Select * from registration Where email = ? AND password = ?";
             st.setString(1, email);
             st.setString(2, password);
-            ResultSet result = st.executeQuery();
-  
             
+            result = st.executeQuery();
+            
+            
+//            dbconn.close();
             if(result.next()){
                 dispose();
-                HomePage home = new HomePage();
-                home.setVisible(true);
+//                Homepage r = new Homepage();
+////                r.setTitle("Register User");
+//                r.setVisible(true);
+
+                new Homepage().setVisible(true);
+                new Login().setVisible(false);
+                System.out.println("Hello");
             }else{
-                System.out.println("eamil : " + email);
-                System.out.println("pass : " + password);
                 JOptionPane.showMessageDialog(this, "Email/Pass not found", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
-            
-            
-        }catch(SQLException ex){
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println("Error opening HomePage: " + ex.getMessage());
-        }
 
+            }catch(SQLException ex){
+//                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                System.err.println("Error opening HomePage: " + ex.getMessage());
+            }
+        }
+        
 //        try{
 //            Class.forName("com.mysql.cj.jdbc.Driver") ;
 //            
@@ -261,7 +276,7 @@ public class Login extends javax.swing.JFrame {
 //            
 //            if(result){
 //                dispose();
-//                HomePage home = new HomePage();
+//                Homepage home = new Homepage();
 //                home.setTitle("Home Page");
 //                home.setVisible(true);
 //            }
