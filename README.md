@@ -33,7 +33,7 @@ To run the project locally, follow these steps:
 1. Open the project in NetBeans IDE.
 2. Set up the MySQL database:
    1. Create a MySQL database named `login_signup`.
-   2. Import the provided SQL script (`database.sql`) to create the necessary tables.
+   2. Import the provided SQL script (`accounts.sql`) to create the necessary tables.
 3. Configure the database connection:
    1. Open the `DBConnection.java` file.
    2. Update the database URL, username, and password with your MySQL credentials.
