@@ -14,12 +14,19 @@ Implementation of Login-signup in NetBeans using Java swing with MySQL Database 
 
 This project aims to provide a simple and intuitive login and signup system for users. It utilizes Java Swing for building the GUI components such as text fields, buttons, and labels. The backend logic handles user authentication and registration, with data stored in a MySQL database.
 
-## Features
+## Features and Demonstration 
 
 User Authentication: Users can log in with their username and password.
 User Registration: New users can sign up by providing necessary information.
 MySQL Database Connection: Utilizes MySQL for storing user credentials securely.
 GUI Interface: Provides a user-friendly graphical interface built with Java Swing.
+
+![Login Page](https://raw.githubusercontent.com/jahidulzaid/login_register-NetBeans/main/project%20photos/login.png)
+<br>
+![Registration Page](https://raw.githubusercontent.com/jahidulzaid/login_register-NetBeans/main/project%20photos/register.png)
+<br>
+![Sample HomePage](https://raw.githubusercontent.com/jahidulzaid/login_register-NetBeans/main/project%20photos/sample%20homepage.png)
+
 
 ## Installation
 
@@ -29,16 +36,16 @@ To run the project locally, follow these steps:
 
 [git clone https://github.com/username/project-name.git](https://github.com/jahidulzaid/login_register-NetBeans.git)
 
-
-1. Open the project in NetBeans IDE.
-2. Set up the MySQL database:
+2. Open the project in NetBeans IDE.
+3. Set up the MySQL database:
    1. Create a MySQL database named `login_signup`.
    2. Import the provided SQL script (`accounts.sql`) to create the necessary tables.
-3. Configure the database connection:
+4. Configure the database connection:
    1. Open the `DBConnection.java` file.
    2. Update the database URL, username, and password with your MySQL credentials.
-4. Build the project to resolve dependencies.
-5. Run the project to launch the application.
+5. Build the project to resolve dependencies.
+6. Run the project to launch the application.
+
 
 
 ## Usage
